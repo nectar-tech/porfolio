@@ -1,8 +1,12 @@
-export default function App() {
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CaseStudy from '@/pages/CaseStudy';
+
+export default function App(): React.ReactNode {
   return (
-    <div>
-      <h1>Welcome to Nectar Portfolio</h1>
-      <p>React app ready to build</p>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<CaseStudy />} />
+      </Routes>
+    </Router>
+  );
 }
