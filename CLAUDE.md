@@ -1,56 +1,29 @@
-# CLAUDE.md
+# System Instructions for Claude: UI/UX & Graphic Design Portfolio
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Core Technologies
+* React (Functional Components, Hooks)
+* TypeScript (Strict Typing)
+* Vite (Build Tool)
+* Tailwind CSS (Styling)
+* Framer Motion (For professional UI animations)
 
-## Project overview
+## Architectural Guidelines: Zero Hardcoding & Scalability
+* **Data Separation:** All content (projects, case studies, biography, contact info) must be stored in external configuration files (e.g., `src/data/projects.ts` or a JSON file) or a Headless CMS. Never hardcode text or project details directly into UI components.
+* **Theme Configuration:** Define all brand colors, typography scales, and spacing in `tailwind.config.ts` or via global CSS variables. This allows the entire visual identity to change by updating a single file.
+* **Component Reusability:** Build modular, atomic components (`ProjectCard`, `Badge`, `ImageGallery`, `SectionHeader`). Design them to accept dynamic props.
+* **Dynamic Routing:** Use React Router to generate case study pages dynamically based on the data file, rather than creating separate hardcoded pages for each project.
 
-Static HTML portfolio for Nectar, a multidisciplinary designer. No build tools, no framework, no package manager — pure HTML/CSS/JS. Open any file directly in a browser or serve with any static server.
+## Coding Standards
+* Enforce strict TypeScript interfaces for all data models (e.g., `Project`, `Experience`, `Skill`).
+* Use absolute imports configured in Vite (e.g., `@/components/...`) for clean architecture.
+* Maintain a clean directory structure: separating `assets`, `components`, `pages`, `hooks`, `utils`, and `data`.
 
-```bash
-# Quickest way to preview locally
-open home.html
+## UI/UX & Design Quality Directives
+* **Performance First:** Optimize all graphic design assets. Serve images in modern formats (WebP/AVIF) and implement lazy loading for galleries. The site must load instantly on Vercel.
+* **Accessibility (a11y):** A UI/UX portfolio must be accessible. Use semantic HTML5 tags (`<main>`, `<nav>`, `<article>`), logical heading hierarchy, and proper ARIA labels for interactive elements.
+* **Fluid Layouts:** Utilize Tailwind's responsive utilities to ensure the design scales flawlessly across mobile, tablet, and ultrawide desktop monitors.
+* **Micro-interactions:** Implement subtle, intentional hover states and page transitions. Use Framer Motion to demonstrate interaction design skills without overwhelming the user.
 
-# Or serve with Python (avoids some cross-origin quirks)
-python3 -m http.server 8080
-```
-
-## File structure
-
-| File | Purpose |
-|---|---|
-| `home.html` | Main portfolio: hero, project cards grid, about, contact |
-| `neon-odyssey.html` | Case study — The Neon Odyssey (learning game) |
-| `academics-project.html` | Case study — Academix |
-| `rimon-case-study.html` | Case study — Rimon |
-
-Each file is fully self-contained: all CSS lives in a `<style>` block in `<head>` and all JS in a `<script>` block before `</body>`. There are no shared stylesheets or script files.
-
-## Design system
-
-All pages share the same visual identity. CSS variables are defined in `:root` in each file — keep them consistent when editing:
-
-| Token | Value | Role |
-|---|---|---|
-| `--cream` / `--bg` | `#faf9f4` / `#F9F8F5` | Page background |
-| `--orange` / `--accent` | `#cd7542` / `#C1693A` | Brand accent, links, highlights |
-| `--text` / `--text-dark` | `#1a1a1a` | Body text |
-| `--muted` / `--text-mid` | `#646464` / `#6B7280` | Secondary text |
-| `--border` | `rgba(205,117,66,0.18–0.20)` | Dividers and outlines |
-
-**Font inconsistency:** `home.html`, `neon-odyssey.html`, and `academics-project.html` use **DM Sans**; `rimon-case-study.html` uses **Inter**. Both are loaded from Google Fonts inline.
-
-## Navigation pattern
-
-Every page has a sticky nav with:
-- Brand link `"Nectar."` (orange, bold) → `home.html` or `#hero`
-- CV download button (pill style, orange outline)
-
-Case study pages additionally have a `← Back` link near the top that returns to `home.html`.
-
-## Project cards (home.html)
-
-Work cards live in `#work .work-list`. Each `.project-card` has:
-- `.card-visual` — image area with a colored background
-- `.card-body` — meta (client + year), title, tag chips, CTA button
-
-Cards with `href="#"` are placeholders (Marhaba projects); `neon-odyssey.html` is the only fully linked case study from the home page.
+## Deployment Strategy
+* Optimized for Vercel deployment.
+* Ensure proper configuration for SPA routing fallback in Vite.
