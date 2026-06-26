@@ -17,6 +17,7 @@ export const personal: PersonalInfo = {
   bio: 'Update this with your own bio in src/data/personal.ts',
   skills: ['Figma', 'UX Research', 'Data Visualization', 'Design Systems', 'Prototyping', 'B2B / Enterprise'],
   email: 'nectarsha@gmail.com',
-  linkedin: 'https://linkedin.com/in/',
-  whatsapp: '972000000000',
+  linkedin: 'https://www.linkedin.com/in/nectar-shavit/',
+  whatsapp: '972547919755',
+  cvUrl: '/cv.pdf',
 };

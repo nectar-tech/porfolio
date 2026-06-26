@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { personal } from '@/data/personal';
 
 export default function Nav() {
   return (
@@ -7,7 +8,9 @@ export default function Nav() {
         Nectar.
       </Link>
       <a
-        href="#"
+        href={personal.cvUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="inline-flex items-center gap-2 px-5 py-2 bg-transparent text-brandOrange rounded-full text-[13px] font-semibold no-underline border-[1.5px] border-brandOrange/45 hover:bg-brandOrange/10 hover:border-brandOrange transition-all duration-200"
       >
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
