@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "ignoreDeprecations": "5.0",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]
