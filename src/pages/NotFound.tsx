@@ -22,7 +22,7 @@ export default function NotFound() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-brandOrange text-cream rounded-full text-[14px] font-semibold no-underline hover:opacity-90 transition-opacity duration-200"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-brandOrange text-cream rounded-full text-[14px] font-semibold no-underline hover:bg-[#784ECC] transition-colors duration-200"
         >
           <ChevronIcon direction="left" size={13} />
           Back to Home

@@ -1,4 +1,4 @@
-export type FeatureIcon = 'person' | 'calendar' | 'layers';
+export type FeatureIcon = 'person' | 'calendar' | 'layers' | 'sun' | 'play' | 'check' | 'heart';
 
 export interface BulletPoint {
   title: string;
@@ -14,13 +14,118 @@ export interface FeatureScreen {
   imageAlt?: string;
 }
 
+export interface StrategyCard {
+  label: string;
+  title: string;
+  body: string;
+}
+
+export interface KpiCard {
+  title: string;
+  description: string;
+  icon: FeatureIcon;
+}
+
+export interface StoryCard {
+  label: string;
+  paragraphs: string[];
+}
+
+export interface ValueCard {
+  title: string;
+  body: string;
+}
+
+export interface StatBox {
+  number: string;
+  body: string;
+}
+
+export interface ScenarioCard {
+  tag: string;
+  body: string;
+}
+
+export interface RoadmapItem {
+  title: string;
+  body: string;
+  badge: string;
+}
+
+export interface RimonData {
+  problem: {
+    label: string;
+    title: string;
+    intro: string;
+    reasons: string[];
+    implications: string[];
+    interviews: { title: string; body: string };
+  };
+  researchInsights: {
+    label: string;
+    title: string;
+    body: string;
+    values: ValueCard[];
+    conclusions: string[];
+  };
+  targetAudience: {
+    label: string;
+    title: string;
+    primaryTarget: string;
+    stats: StatBox[];
+    mainChallenges: string[];
+    coreValues: { headline: string; bullets: string[] };
+    goal: string;
+  };
+  successMetrics: {
+    label: string;
+    title: string;
+    initial: string[];
+    advanced: string[];
+  };
+  keyScreens: {
+    label: string;
+    title: string;
+    screens: { label: string }[];
+  };
+  scenarios: {
+    label: string;
+    title: string;
+    cards: ScenarioCard[];
+  };
+  businessModel: {
+    label: string;
+    title: string;
+    body: string;
+  };
+  roadmap: {
+    label: string;
+    title: string;
+    items: RoadmapItem[];
+  };
+}
+
 export interface CaseStudyProject {
   id: string;
   client: string;
   year: string;
   headline: string;
+  subtitle?: string;
   tags: string[];
   heroImage?: string;
+
+  // Neon Odyssey sections
+  overview?: { label: string; title: string; body: string };
+  strategy?: { label: string; title: string; cards: StrategyCard[] };
+  research?: { label: string; title: string; bullets: BulletPoint[] };
+  game?: { label: string; title: string; bullets: BulletPoint[] };
+  narrative?: { label: string; title: string; intro: string; story: StoryCard };
+  b2b?: { label: string; title: string; body?: string };
+  kpis?: { label: string; title: string; cards: KpiCard[] };
+
+  // Rimon sections
+  rimon?: RimonData;
+
   challenge: { label: string; title: string; bullets: BulletPoint[] };
   architecture: { label: string; title: string; image?: string; imageAlt?: string };
   highlights: { label: string; title: string; bullets: BulletPoint[] };
@@ -111,6 +216,282 @@ export const projects: CaseStudyProject[] = [
       title: 'A manual process, transformed',
       body: "This project sharpened my ability to break down complex business processes into an intuitive interface, reaffirming that the true value of design lies in the user's ability to make evidence based decisions, on time, and with ease.",
     },
-    footerNav: {},
+    footerNav: {
+      prev: { label: 'Neon Odyssey', href: '/case-study/neon-odyssey' },
+      next: { label: 'Rimon', href: '/case-study/rimon' },
+    },
+  },
+  {
+    id: 'rimon',
+    client: 'RIMON',
+    year: '2025',
+    headline: 'Personalizing Rights & Benefits Utilization',
+    subtitle: 'Native Mobile Application for Managing and Utilizing Rights and Financial Benefits',
+    tags: ['UX / UI Design', 'Product Strategy', 'Mobile App'],
+    rimon: {
+      problem: {
+        label: 'The Problem',
+        title: 'Many users struggle to fully utilize their financial rights and entitlements',
+        intro: 'There is a significant difficulty in tracking and managing these rights and benefits effectively.',
+        reasons: [
+          'Lack of awareness regarding benefits',
+          'Benefits originate from a variety of different sources',
+          'Difficulty in understanding the details of a benefit',
+        ],
+        implications: [
+          'Many rights remain unclaimed',
+          'Financial loss',
+          'Waste of time and effort',
+          'Feelings of confusion and dissatisfaction, or the sense of being taken advantage of leading to a lack of control and security',
+        ],
+        interviews: {
+          title: 'Talking to them',
+          body: "During the research phase, I conducted in-depth user interviews to understand the issue comprehensively. I chose interviews over questionnaires to grasp each person's motivations, needs, challenges, and frustrations better. These interviews included military reservists, victims of hostile acts, and individuals with government recognized disabilities, capturing insights from a broad spectrum of users.",
+        },
+      },
+      researchInsights: {
+        label: 'User Research Insights',
+        title: "The issue is not a lack of information, it's an overload of fragmented information and a lack of transparency",
+        body: 'Interviewees described feelings of confusion, burden, and a lack of control. Many expressed frustration with the need to log into various websites and track everything manually or in their heads.',
+        values: [
+          { title: 'Real-time control and management', body: 'Instant visibility into all available benefits and their current status' },
+          { title: 'Saving time and money', body: 'Reducing the hours spent navigating bureaucracy and eliminating unclaimed financial loss' },
+          { title: 'Simplicity and transparency', body: 'Clear language and a frictionless interface that removes the sense of bureaucratic burden' },
+          { title: 'A sense of satisfaction and utility', body: 'Users feel rewarded when they successfully redeem a benefit they didn\'t know they had' },
+          { title: 'Personalization tailored to interests', body: 'Recommendations and notifications scoped to what actually matters to each individual user' },
+        ],
+        conclusions: [
+          'Consolidation and automated monitoring in a single interface',
+          'Smart notifications before expiration dates or when new benefits become available',
+          'A "Total Savings" display',
+          'An accessible, non-bureaucratic user experience',
+        ],
+      },
+      targetAudience: {
+        label: 'Target Audience',
+        title: "Who We're Designing For",
+        primaryTarget: 'Reservists, victims of hostilities, and individuals with disabilities who are eligible for a wide range of financial benefits and services (treatments, vacations, equipment, etc.) but struggle to track and actually utilize them.',
+        stats: [
+          { number: '1.25M', body: 'people recognized as disabled by the National Insurance Institute as of 2022 — approximately 20% of the population' },
+          { number: '89,712', body: 'civilian victims of hostilities in Israel, of whom 75,995 have been recognized since the October 7th disaster and throughout the war' },
+        ],
+        mainChallenges: [
+          'Difficulty in managing and utilizing rights',
+          'Lack of time and energy for bureaucratic processes',
+        ],
+        coreValues: {
+          headline: 'Convenience | A sense of control and security.',
+          bullets: [
+            'Automatic utilization of rights without the need to track or remember criteria and dates',
+            'Real-time financial savings, refunds, vouchers, and benefits redeemed',
+            'A sense of satisfaction from finding the most valuable benefits',
+          ],
+        },
+        goal: 'Centralizing all rights in one place, including status and expiration dates to assist in actual utilization',
+      },
+      successMetrics: {
+        label: 'Success Metrics',
+        title: 'How We Measure Impact',
+        initial: [
+          'Number of users who registered and entered basic details',
+          'Number of benefits identified for each user',
+        ],
+        advanced: [
+          'Utilization of at least one benefit per user',
+          'Reduction in average time required to utilize a benefit compared to the current process',
+        ],
+      },
+      keyScreens: {
+        label: 'Key Screens',
+        title: 'Onboarding',
+        screens: [
+          { label: 'Personal Details' },
+          { label: 'Personal Dashboard' },
+          { label: 'Nearby Benefits' },
+        ],
+      },
+      scenarios: {
+        label: 'Push Notification',
+        title: 'Returning to the Product',
+        cards: [
+          {
+            tag: '',
+            body: 'A week later, Rimon receives a notification: "You have one month left to use your new computer benefit — don\'t miss out!" He opens the app, reviews the options, and orders a computer through one of the recommended stores. At the end of the month, he receives a summary: "You utilized 4 benefits this month with a total value of 7,500 NIS."',
+          },
+        ],
+      },
+      businessModel: {
+        label: 'Business Model',
+        title: 'White Label for Scale',
+        body: 'The app will operate in partnership with official bodies (such as the National Insurance Institute or "Behatzlacha"). This will allow these organizations to increase their benefit utilization rates, while we receive a stable model of licensing and recurring payments.',
+      },
+      roadmap: {
+        label: 'Roadmap',
+        title: "What's Next",
+        items: [
+          {
+            title: 'Family Entitlement Management',
+            body: 'Sync and combine benefits between spouses for smart, unified household budgeting.',
+            badge: 'Planned',
+          },
+          {
+            title: 'Auto Reimbursement',
+            body: 'Connect to financial systems to track open claims and notify users the moment funds are deposited.',
+            badge: 'Planned',
+          },
+        ],
+      },
+    },
+    challenge: { label: 'The Challenge', title: '', bullets: [] },
+    architecture: { label: 'Site Architecture', title: 'Site Architecture' },
+    highlights: { label: 'Design Highlights', title: '', bullets: [] },
+    keyFeatures: { label: 'Key Features', title: '', screens: [] },
+    impact: { label: 'Impact & Reflection', title: '', body: '' },
+    footerNav: {
+      prev: { label: 'Academix', href: '/case-study/academix' },
+      next: { label: 'Neon Odyssey', href: '/case-study/neon-odyssey' },
+    },
+  },
+  {
+    id: 'neon-odyssey',
+    client: 'NEON ODYSSEY',
+    year: '2025',
+    headline: 'Interactive Learning & Knowledge Classification Platform',
+    subtitle: 'Transforming data-sorting and quiz mechanics into an engaging visual ecosystem.',
+    tags: ['UX / UI Design', 'Gamification', 'EdTech', 'B2B / B2C'],
+    overview: {
+      label: 'Project Overview',
+      title: 'From static quizzes to a living visual ecosystem',
+      body: 'Neon Odyssey is a dual-sided web platform designed to solve a core educational challenge: How do we turn static "True or False" quizzes into highly engaging digital experiences without causing cognitive overload?',
+    },
+    strategy: {
+      label: 'Product Strategy & Foundations',
+      title: 'Two audiences, one platform',
+      cards: [
+        {
+          label: 'B2B',
+          title: 'Content Creators',
+          body: 'Educators, instructors, and corporate trainers looking to build custom knowledge sorting games.',
+        },
+        {
+          label: 'B2C',
+          title: 'Learners',
+          body: 'Students (ages 12+) and adult learners.',
+        },
+      ],
+    },
+    research: {
+      label: 'Research & Behavioral Insights',
+      title: 'Grounding design in how people actually learn',
+      bullets: [
+        {
+          title: 'Spatial Learning vs. Text Lists',
+          body: 'Research shows learners retain information more effectively when data is anchored to spatial and visual landmarks (e.g., neon signs on buildings) rather than static text blocks.',
+        },
+        {
+          title: 'Non-Punitive Feedback Loops',
+          body: 'Traditional "X" and "V" marks can feel discouraging. In a gamified context, incorrect choices trigger playful, instant visual consequences encouraging safe trial and error without causing abandonment.',
+        },
+      ],
+    },
+    game: {
+      label: 'The Game',
+      title: 'How the mechanics work',
+      bullets: [
+        {
+          title: '',
+          body: 'Neon Odyssey is an educational content generator game where players are presented with "True or False" questions. The player must collect neon lights from signs that represent the correct answers. Each sign glowing with neon light symbolizes the right response.',
+        },
+        {
+          title: '',
+          body: 'If the player answers incorrectly, instead of collecting neon lights, the mosquito will encounter a mosquito zapper, getting shocked and losing progress.',
+        },
+        {
+          title: '',
+          body: 'As the player successfully collects the required amount of neon lights, the mosquito will be able to spread and restore the Northern Lights across the landscapes of America, bringing back their breathtaking glow.',
+        },
+      ],
+    },
+    narrative: {
+      label: 'Conceptual Framework & Narrative',
+      title: 'A story that makes the mechanics stick',
+      intro: 'To give the educational mechanics a cohesive visual anchor, the interface uses a light thematic story.',
+      story: {
+        label: 'The Story',
+        paragraphs: [
+          'In the 1950s, the rise of neon lights in America had a devastating impact on the balance of light in the world, threatening the very existence of the Northern Lights.',
+          'A mosquito with extraordinary magical powers embarks on a mission to collect neon lights. She will use the energy she gathers to restore the glow of the Northern Lights.',
+        ],
+      },
+    },
+    b2b: {
+      label: 'B2B Platform Focus',
+      title: 'The Creator Platform CMS Editor',
+    },
+    kpis: {
+      label: 'Product KPIs & Success Metrics',
+      title: 'Measuring what matters',
+      cards: [
+        {
+          title: 'Time to Task',
+          description: 'Empowering creators to build and launch a complete sorting game in under 3 minutes.',
+          icon: 'calendar',
+        },
+        {
+          title: 'Template Retention',
+          description: 'Measuring how frequently educators return to the CMS to build new games using existing infrastructure.',
+          icon: 'person',
+        },
+      ],
+    },
+    challenge: {
+      label: 'The Challenge',
+      title: 'Coming soon',
+      bullets: [],
+    },
+    architecture: { label: 'Site Architecture', title: 'Site Architecture' },
+    highlights: { label: 'Design Highlights', title: 'Coming soon', bullets: [] },
+    keyFeatures: {
+      label: 'UX / UI Deep Dive',
+      title: '',
+      screens: [
+        {
+          number: '01',
+          title: 'Jukebox Stage Selection',
+          description:
+            'Serving as the main progression hub, this menu maps out classification levels in a clear numerical sequence providing an intuitive user journey from first launch to final stage without any decision fatigue.',
+          icon: 'sun',
+        },
+        {
+          number: '02',
+          title: 'In Game, Real Time Sorting',
+          description:
+            "Text data is dynamically mapped onto glowing neon signs across a cityscape. Learners navigate the avatar to collect only the valid target data points based on the level's objective.",
+          icon: 'play',
+        },
+        {
+          number: '03',
+          title: 'Character States & Micro-Interactions',
+          description: '',
+          icon: 'check',
+        },
+        {
+          number: '04',
+          title: 'Emotional Closure',
+          description:
+            'Upon completing all criteria, the interface rewards the user by displaying the fully restored Northern Lights landscape.',
+          icon: 'heart',
+        },
+      ],
+    },
+    impact: {
+      label: 'Impact & Reflection',
+      title: 'Coming soon',
+      body: '',
+    },
+    footerNav: {
+      prev: { label: 'Rimon', href: '/case-study/rimon' },
+      next: { label: 'Academix', href: '/case-study/academix' },
+    },
   },
 ];

@@ -10,7 +10,7 @@ export default function ArchitectureSection({ data }: ArchitectureSectionProps) 
   return (
     <div>
       <SectionHeader label={data.label} title={data.title} />
-      <div className="rounded-2xl overflow-hidden border border-brandBorder bg-cardBg mt-5">
+      <div className="rounded-[30px] overflow-hidden bg-cardBg mt-5 shadow-[0_5px_6px_rgba(0,0,0,0.11)]">
         {data.image ? (
           <img
             src={data.image}

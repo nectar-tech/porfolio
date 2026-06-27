@@ -7,12 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#f8f8f6',
-        brandOrange: '#cd7542',
-        mainText: '#1a1a1a',
-        muted: '#646464',
-        brandBorder: 'rgba(205, 117, 66, 0.18)',
-        cardBg: '#f4f2ec',
+        cream: '#F5F5F5',
+        brandOrange: '#663CBA',
+        mainText: '#2D2D2D',
+        muted: '#828282',
+        brandBorder: '#E2E2E2',
+        cardBg: '#F3F3F3',
+        brandLight: '#92693D',
       },
       fontFamily: {
         sans: ['"DM Sans"', 'sans-serif'],
