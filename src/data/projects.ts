@@ -12,6 +12,7 @@ export interface FeatureScreen {
   icon: FeatureIcon;
   image?: string;
   imageAlt?: string;
+  images?: { src: string; alt: string }[];
 }
 
 export interface StrategyCard {
@@ -21,6 +22,7 @@ export interface StrategyCard {
 }
 
 export interface KpiCard {
+  label?: string;
   title: string;
   description: string;
   icon: FeatureIcon;
@@ -86,12 +88,14 @@ export interface RimonData {
   keyScreens: {
     label: string;
     title: string;
-    screens: { label: string }[];
+    screens: { label: string; image?: string; imageAlt?: string }[];
   };
   scenarios: {
     label: string;
     title: string;
     cards: ScenarioCard[];
+    image?: string;
+    imageAlt?: string;
   };
   businessModel: {
     label: string;
@@ -117,14 +121,15 @@ export interface CaseStudyProject {
   // Neon Odyssey sections
   overview?: { label: string; title: string; body: string };
   strategy?: { label: string; title: string; cards: StrategyCard[] };
-  research?: { label: string; title: string; bullets: BulletPoint[] };
+  research?: { label: string; title: string; body?: string; bullets: BulletPoint[] };
   game?: { label: string; title: string; bullets: BulletPoint[] };
   narrative?: { label: string; title: string; intro: string; story: StoryCard };
-  b2b?: { label: string; title: string; body?: string };
-  kpis?: { label: string; title: string; cards: KpiCard[] };
+  b2b?: { label: string; title: string; body?: string; image?: string; imageAlt?: string };
+  kpis?: { label: string; title: string; body?: string; cards: KpiCard[] };
 
   // Rimon sections
   rimon?: RimonData;
+  targetAudienceImage?: string;
 
   challenge: { label: string; title: string; bullets: BulletPoint[] };
   architecture: { label: string; title: string; image?: string; imageAlt?: string };
@@ -142,9 +147,9 @@ export const projects: CaseStudyProject[] = [
     id: 'academix',
     client: 'ACADEMIX',
     year: '2025',
-    headline:
-      'unified platform providing a streamlined end to end infrastructure that centralizes the entire onboarding and management lifecycle',
-    tags: ['UX / UI Design', 'Data Visualization'],
+    headline: 'Onboarding, training, and scheduling\nin one unified workspace',
+    tags: ['Dashboard', 'Complex System'],
+    heroImage: '/images/home/ACADEMICS.jpg',
     challenge: {
       label: 'The Challenge',
       title: 'Three core issues impacting team performance',
@@ -191,16 +196,16 @@ export const projects: CaseStudyProject[] = [
           description:
             'The dashboard provides commanders with a real time overview of recruit progress, enabling them to track individual performance, identify skill gaps, and monitor team development through integrated evaluation feeds, task tracking, and analytical performance data.',
           icon: 'person',
-          image: 'דף_משובים_כולל__ציונים_.jpg',
-          imageAlt: 'Trainee overview dashboard',
+          image: '/images/academix/feedback.jpg',
+          imageAlt: 'Trainee feedback dashboard showing performance scores and recent evaluations',
         },
         {
           number: '02',
           title: 'Scheduling Engine',
           description: "Provides full transparency regarding the recruit's workload on any given day.",
           icon: 'calendar',
-          image: 'הוספת_ציר_-_לאחר_לחיצה_על_כפתור.jpg',
-          imageAlt: 'Scheduling engine calendar',
+          image: '/images/academix/calendar.jpg',
+          imageAlt: 'Monthly calendar view of the scheduling engine showing trainee workload',
         },
         {
           number: '03',
@@ -208,6 +213,8 @@ export const projects: CaseStudyProject[] = [
           description:
             'The platform features an intuitive interface that allows management to organize training content into distinct learning pillars and update curricula in real time.',
           icon: 'layers',
+          image: '/images/academix/courses.jpg',
+          imageAlt: 'Course management view showing cohort breakdown, NPS scores, and training metrics',
         },
       ],
     },
@@ -227,7 +234,7 @@ export const projects: CaseStudyProject[] = [
     year: '2025',
     headline: 'Personalizing Rights & Benefits Utilization',
     subtitle: 'Native Mobile Application for Managing and Utilizing Rights and Financial Benefits',
-    tags: ['UX / UI Design', 'Product Strategy', 'Mobile App'],
+    tags: ['Product Strategy', 'Mobile App'],
     rimon: {
       problem: {
         label: 'The Problem',
@@ -305,9 +312,9 @@ export const projects: CaseStudyProject[] = [
         label: 'Key Screens',
         title: 'Onboarding',
         screens: [
-          { label: 'Personal Details' },
-          { label: 'Personal Dashboard' },
-          { label: 'Nearby Benefits' },
+          { label: 'Personal Details', image: '/images/rimon/personal-details.png', imageAlt: 'Onboarding screen for entering personal ID number' },
+          { label: 'Personal Dashboard', image: '/images/rimon/dashboard.png', imageAlt: 'Main dashboard showing benefits overview and total savings' },
+          { label: 'Nearby Benefits', image: '/images/rimon/nearby.png', imageAlt: 'Map view of nearby benefits by location' },
         ],
       },
       scenarios: {
@@ -319,6 +326,8 @@ export const projects: CaseStudyProject[] = [
             body: 'A week later, Rimon receives a notification: "You have one month left to use your new computer benefit — don\'t miss out!" He opens the app, reviews the options, and orders a computer through one of the recommended stores. At the end of the month, he receives a summary: "You utilized 4 benefits this month with a total value of 7,500 NIS."',
           },
         ],
+        image: '/images/rimon/notification.png',
+        imageAlt: 'Dashboard with a push notification prompting the user to act on a benefit',
       },
       businessModel: {
         label: 'Business Model',
@@ -342,6 +351,8 @@ export const projects: CaseStudyProject[] = [
         ],
       },
     },
+    heroImage: '/images/home/RIMON.jpg',
+    targetAudienceImage: '/images/rimon/interests.png',
     challenge: { label: 'The Challenge', title: '', bullets: [] },
     architecture: { label: 'Site Architecture', title: 'Site Architecture' },
     highlights: { label: 'Design Highlights', title: '', bullets: [] },
@@ -356,9 +367,10 @@ export const projects: CaseStudyProject[] = [
     id: 'neon-odyssey',
     client: 'NEON ODYSSEY',
     year: '2025',
-    headline: 'Interactive Learning & Knowledge Classification Platform',
+    headline: 'Interactive Learning Platform',
     subtitle: 'Transforming data-sorting and quiz mechanics into an engaging visual ecosystem.',
-    tags: ['UX / UI Design', 'Gamification', 'EdTech', 'B2B / B2C'],
+    tags: ['Gamification', 'EdTech', 'B2B / B2C'],
+    heroImage: '/images/home/NEON.jpg',
     overview: {
       label: 'Project Overview',
       title: 'From static quizzes to a living visual ecosystem',
@@ -382,15 +394,16 @@ export const projects: CaseStudyProject[] = [
     },
     research: {
       label: 'Research & Behavioral Insights',
-      title: 'Grounding design in how people actually learn',
+      title: 'Research-Driven Design Process',
+      body: 'To ensure an effective learning experience, I grounded my UI/UX decisions in cognitive psychology principles:',
       bullets: [
         {
-          title: 'Spatial Learning vs. Text Lists',
-          body: 'Research shows learners retain information more effectively when data is anchored to spatial and visual landmarks (e.g., neon signs on buildings) rather than static text blocks.',
+          title: 'Spatial Anchoring (Based on Dual Coding Theory)',
+          body: 'Research shows that users retain information better when it is spatially anchored. Therefore, instead of using static text lists, I designed the navigation interface so that each topic is linked to a visual landmark (such as neon signs on buildings). This creates a mental map that reduces cognitive load.',
         },
         {
           title: 'Non-Punitive Feedback Loops',
-          body: 'Traditional "X" and "V" marks can feel discouraging. In a gamified context, incorrect choices trigger playful, instant visual consequences encouraging safe trial and error without causing abandonment.',
+          body: 'To encourage safe "trial and error," I avoided traditional "X" marks that can cause frustration. Instead, in-game mistakes trigger playful and immediate visual feedback (gamified consequences), which lowers stress levels and prevents user abandonment.',
         },
       ],
     },
@@ -427,19 +440,22 @@ export const projects: CaseStudyProject[] = [
     b2b: {
       label: 'B2B Platform Focus',
       title: 'The Creator Platform CMS Editor',
+      image: '/images/neon-odyssey/b2b-editor.png',
+      imageAlt: 'Desktop mockup of the Neon Odyssey CMS editor showing the game creation interface',
     },
     kpis: {
       label: 'Product KPIs & Success Metrics',
       title: 'Measuring what matters',
+      body: 'To ensure Neon Odyssey succeeds as an educational tool, I defined distinct KPIs for each user persona:',
       cards: [
         {
-          title: 'Time to Task',
-          description: 'Empowering creators to build and launch a complete sorting game in under 3 minutes.',
+          title: 'Content Creators',
+          description: 'I measure Time to Create (TTC). My goal is to minimize the effort required to build a lesson, ensuring the editor feels intuitive rather than burdensome.',
           icon: 'calendar',
         },
         {
-          title: 'Template Retention',
-          description: 'Measuring how frequently educators return to the CMS to build new games using existing infrastructure.',
+          title: 'Player',
+          description: 'I measure Lesson Completion Rate. This is the primary indicator of engagement; low completion suggests the UI or difficulty curve needs to be re-evaluated to better support learning outcomes.',
           icon: 'person',
         },
       ],
@@ -452,8 +468,8 @@ export const projects: CaseStudyProject[] = [
     architecture: { label: 'Site Architecture', title: 'Site Architecture' },
     highlights: { label: 'Design Highlights', title: 'Coming soon', bullets: [] },
     keyFeatures: {
-      label: 'UX / UI Deep Dive',
-      title: '',
+      label: 'The Screens',
+      title: 'UX / UI Deep Dive',
       screens: [
         {
           number: '01',
@@ -461,26 +477,45 @@ export const projects: CaseStudyProject[] = [
           description:
             'Serving as the main progression hub, this menu maps out classification levels in a clear numerical sequence providing an intuitive user journey from first launch to final stage without any decision fatigue.',
           icon: 'sun',
+          image: '/images/neon-odyssey/neon-6.jpg',
+          imageAlt: 'Jukebox stage selection screen showing numbered level records',
         },
         {
           number: '02',
           title: 'In Game, Real Time Sorting',
           description:
-            "Text data is dynamically mapped onto glowing neon signs across a cityscape. Learners navigate the avatar to collect only the valid target data points based on the level's objective.",
+            'Text data is dynamically mapped onto glowing neon signs across a cityscape. Learners navigate the avatar to collect only the valid target data points based on the level\'s objective.',
           icon: 'play',
+          images: [
+            { src: '/images/neon-odyssey/neon-1-v2.jpg', alt: 'Gameplay screen showing the firefly avatar collecting neon signs across a blue city nightscape' },
+            { src: '/images/neon-odyssey/neon-2-v2.jpg', alt: 'Gameplay screen showing a second section of the night city with more neon signs' },
+          ],
         },
         {
           number: '03',
-          title: 'Character States & Micro-Interactions',
-          description: '',
-          icon: 'check',
+          title: 'Multiple Level Environments',
+          description:
+            'Each level introduces a distinct visual environment. From a neon-lit city at night to a warm carnival fairground. Keeping learners visually engaged across the full experience.',
+          icon: 'play',
+          image: '/images/neon-odyssey/neon-4.jpg',
+          imageAlt: 'Gameplay screen showing a warm-toned fairground level with neon signs on carnival attractions',
         },
         {
           number: '04',
+          title: 'Character States & Micro-Interactions',
+          description: '',
+          icon: 'check',
+          image: '/images/neon-odyssey/states.jpg',
+          imageAlt: 'Character state illustrations showing success and failure animations for the mosquito avatar',
+        },
+        {
+          number: '05',
           title: 'Emotional Closure',
           description:
             'Upon completing all criteria, the interface rewards the user by displaying the fully restored Northern Lights landscape.',
           icon: 'heart',
+          image: '/images/neon-odyssey/neon-5.jpg',
+          imageAlt: 'Victory screen showing the fully restored Northern Lights aurora with a congratulatory sign',
         },
       ],
     },

@@ -13,30 +13,30 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       to={`/case-study/${id}`}
-      className="group flex flex-col rounded-[30px] overflow-hidden bg-cardBg no-underline shadow-[0_5px_6px_rgba(0,0,0,0.11)] transition-all duration-300"
+      className="group flex flex-col md:flex-row rounded-[30px] overflow-hidden bg-white no-underline shadow-[0_5px_6px_rgba(0,0,0,0.11)] transition-all duration-300"
     >
-      <div className="overflow-hidden">
+      <div className="w-full md:w-[40%] lg:w-[45%] md:shrink-0 overflow-hidden">
         {heroImage ? (
           <img
             src={heroImage}
             alt={`${client} case study`}
-            className="w-full aspect-[16/10] object-cover block transition-transform duration-500 group-hover:scale-[1.03]"
+            className="w-full h-full object-cover block aspect-[16/9] md:aspect-auto transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
           />
         ) : (
-          <div className="aspect-[16/10]">
+          <div className="w-full h-full min-h-[260px]">
             <ImagePlaceholder minHeight="h-full" />
           </div>
         )}
       </div>
-      <div className="p-7 flex flex-col gap-4 flex-1">
+      <div className="p-8 lg:p-12 flex flex-col gap-4 flex-1 justify-center">
         <p className="text-base font-semibold text-brandOrange tracking-wide">
           {client} <span className="text-muted font-normal">{year}</span>
         </p>
-        <p className="text-[20px] font-bold text-mainText leading-snug tracking-tight line-clamp-3">{headline}</p>
-        <div className="flex flex-wrap gap-2 mt-auto pt-2">
+        <p className="text-[22px] lg:text-[28px] font-bold text-mainText leading-snug tracking-tight whitespace-pre-line line-clamp-3">{headline}</p>
+        <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <span key={tag} className="inline-flex items-center px-3.5 py-1 rounded-full text-sm font-medium text-muted">
+            <span key={tag} className="inline-flex items-center px-3.5 py-1 rounded-full text-[12px] font-medium text-muted bg-[#F7F7F7]">
               {tag}
             </span>
           ))}

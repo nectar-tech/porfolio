@@ -34,7 +34,7 @@ export default function CaseStudy() {
   const {
     client, year, headline, subtitle, tags, heroImage,
     overview, strategy, research, game, narrative, b2b, kpis,
-    rimon,
+    rimon, targetAudienceImage,
     challenge, architecture, highlights, keyFeatures, impact, footerNav,
   } = project;
 
@@ -68,7 +68,7 @@ export default function CaseStudy() {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center px-[18px] py-2 rounded-full text-sm font-medium text-mainText bg-transparent"
+              className="inline-flex items-center px-[18px] py-2 rounded-2xl text-sm font-medium bg-white" style={{ color: '#616775' }}
             >
               {tag}
             </span>
@@ -121,9 +121,10 @@ export default function CaseStudy() {
             <section className="w-full py-16 px-6 md:px-[60px]">
               <div className="max-w-[760px] mx-auto">
                 <SectionHeader label={research.label} title={research.title} />
+                {research.body && <p className={`${bodyText} mt-4 mb-2`}>{research.body}</p>}
                 <ul className="flex flex-col gap-3.5 mt-5">
                   {research.bullets.map((b) => (
-                    <BulletItem key={b.title} title={b.title} body={b.body} />
+                    <BulletItem key={b.title} title={b.title} body={b.body} icon="/images/neon-odyssey/neon-icon-star.png" iconSize="w-8 h-8" />
                   ))}
                 </ul>
               </div>
@@ -136,7 +137,7 @@ export default function CaseStudy() {
                 <SectionHeader label={game.label} title={game.title} />
                 <ul className="flex flex-col gap-3.5 mt-5">
                   {game.bullets.map((b, i) => (
-                    <BulletItem key={i} title={b.title} body={b.body} />
+                    <BulletItem key={i} title={b.title} body={b.body} icon="/images/neon-odyssey/neon-icon-star.png" iconSize="w-8 h-8" />
                   ))}
                 </ul>
               </div>
@@ -148,15 +149,14 @@ export default function CaseStudy() {
               <div className="max-w-[760px] mx-auto">
                 <SectionHeader label={narrative.label} title={narrative.title} />
                 <p className={`${bodyText} mt-4`}>{narrative.intro}</p>
-                <div className="mt-9 rounded-[30px] overflow-hidden shadow-[0_5px_6px_rgba(0,0,0,0.11)] grid grid-cols-1 md:grid-cols-2">
-                  <div className="bg-mainText p-9 flex flex-col justify-center gap-3.5">
-                    <p className={cardLabel}>{narrative.story.label}</p>
-                    {narrative.story.paragraphs.map((p, i) => (
-                      <p key={i} className="text-sm leading-[1.8] text-white/70 italic">{p}</p>
-                    ))}
+                <div className="mt-9 rounded-[30px] overflow-hidden shadow-[0_5px_6px_rgba(0,0,0,0.11)] grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-0" style={{ background: 'linear-gradient(to right, #1E1E1E, #313790)' }}>
+                  <div className="flex items-center justify-center pb-0 md:items-stretch">
+                    <img src="/images/neon-odyssey/logoIcon.png" alt="Neon Odyssey mosquito character" className="w-full object-contain max-h-[120px] md:max-h-none" />
                   </div>
-                  <div className="bg-cardBg min-h-[240px] flex items-center justify-center">
-                    <ImagePlaceholder minHeight="min-h-[240px]" />
+                  <div className="px-9 pt-2 pb-9 md:p-9 flex flex-col justify-center gap-3.5">
+                    {narrative.story.paragraphs.map((p, i) => (
+                      <p key={i} className="text-base leading-[1.8] text-white/90">{p}</p>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function CaseStudy() {
             <div className="max-w-[760px] mx-auto">
               <SectionHeader label={keyFeatures.label} title={keyFeatures.title} />
               {keyFeatures.screens.map((screen) => (
-                <FeatureBlock key={screen.number} screen={screen} />
+                <FeatureBlock key={screen.number} screen={screen} hideHeader />
               ))}
             </div>
           </section>
@@ -179,8 +179,12 @@ export default function CaseStudy() {
                 <p className={eyebrow}>{b2b.label}</p>
                 <h2 className={sectionTitle}>{b2b.title}</h2>
                 {b2b.body && <p className={`${bodyText} mt-4`}>{b2b.body}</p>}
-                <div className="mt-8 rounded-[30px] overflow-hidden bg-white shadow-[0_5px_6px_rgba(0,0,0,0.11)]">
-                  <ImagePlaceholder minHeight="min-h-[320px]" />
+                <div className="mt-8">
+                  {b2b.image ? (
+                    <img src={b2b.image} alt={b2b.imageAlt ?? ''} className="w-full block" loading="lazy" />
+                  ) : (
+                    <ImagePlaceholder minHeight="min-h-[320px]" />
+                  )}
                 </div>
               </div>
             </section>
@@ -191,10 +195,11 @@ export default function CaseStudy() {
               <div className="max-w-[1100px] mx-auto">
                 <p className={eyebrow}>{kpis.label}</p>
                 <h2 className={sectionTitle}>{kpis.title}</h2>
-                <div className="mt-10 rounded-[30px] shadow-[0_5px_6px_rgba(0,0,0,0.11)] overflow-hidden bg-cream grid grid-cols-1 md:grid-cols-3">
+                {kpis.body && <p className={`${bodyText} mb-10`}>{kpis.body}</p>}
+                <div className="mt-10 rounded-[30px] shadow-[0_5px_6px_rgba(0,0,0,0.11)] overflow-hidden bg-cream grid grid-cols-1 md:grid-cols-2">
                   {kpis.cards.map((card, i) => (
-                    <div key={card.title} className={`p-10 text-center ${i !== 0 ? 'border-t md:border-t-0 md:border-l border-brandBorder' : ''}`}>
-                      <p className="text-base font-bold text-mainText mb-2">{card.title}</p>
+                    <div key={card.title} className={`p-10 ${i !== 0 ? 'border-t md:border-t-0 md:border-l border-brandBorder' : ''}`}>
+                      <p className="text-lg font-bold text-mainText mb-3">{card.title}</p>
                       <p className={smallBody}>{card.description}</p>
                     </div>
                   ))}
@@ -281,9 +286,6 @@ export default function CaseStudy() {
                   <h2 className={sectionTitle}>{rimon.targetAudience.title}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                     <div className="bg-white rounded-[30px] shadow-[0_5px_6px_rgba(0,0,0,0.11)] overflow-hidden">
-                      <div className="bg-cream h-[200px] flex items-center justify-center">
-                        <ImagePlaceholder minHeight="min-h-[200px]" />
-                      </div>
                       <div className="p-8">
                         <p className={cardLabel}>Primary Target</p>
                         <p className={smallBody}>{rimon.targetAudience.primaryTarget}</p>
@@ -368,8 +370,14 @@ export default function CaseStudy() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                     {rimon.keyScreens.screens.map((s) => (
                       <div key={s.label}>
-                        <div className="bg-white rounded-[30px] shadow-[0_5px_6px_rgba(0,0,0,0.11)] aspect-[9/16] flex items-center justify-center">
-                          <ImagePlaceholder minHeight="min-h-full" />
+                        <div className="bg-white rounded-[30px] shadow-[0_5px_6px_rgba(0,0,0,0.11)] overflow-hidden">
+                          {s.image ? (
+                            <img src={s.image} alt={s.imageAlt ?? s.label} className="w-full block" loading="lazy" />
+                          ) : (
+                            <div className="aspect-[9/16] flex items-center justify-center">
+                              <ImagePlaceholder minHeight="min-h-full" />
+                            </div>
+                          )}
                         </div>
                         <p className="text-sm font-semibold text-muted text-center mt-3.5">{s.label}</p>
                       </div>
@@ -388,7 +396,11 @@ export default function CaseStudy() {
                       <p className={bodyText}>{rimon.scenarios.cards[0].body}</p>
                     </div>
                     <div className="bg-cream rounded-[30px] shadow-[0_5px_6px_rgba(0,0,0,0.11)] overflow-hidden">
-                      <ImagePlaceholder minHeight="min-h-[280px]" />
+                      {rimon.scenarios.image ? (
+                        <img src={rimon.scenarios.image} alt={rimon.scenarios.imageAlt ?? ''} className="w-full block" loading="lazy" />
+                      ) : (
+                        <ImagePlaceholder minHeight="min-h-[280px]" />
+                      )}
                     </div>
                   </div>
                 </div>
